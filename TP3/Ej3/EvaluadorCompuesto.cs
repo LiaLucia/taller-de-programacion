@@ -9,9 +9,29 @@ namespace Ej3
     class EvaluadorCompuesto : IEvaluador
     {
         private IEvaluador iEvaluadores;
-        public EvaluadorCompuesto()
-        {
+        private List<IEvaluador> evaluadores;
 
+        public EvaluadorCompuesto()
+        { }
+
+        public bool EsValida(SolicitudPrestamo pSolicitud)
+        {
+            bool resultado = true;
+            foreach(IEvaluador evaluador in evaluadores)
+            {
+                if (evaluador.EsValida(pSolicitud)==false)
+                {
+                    resultado = false;
+                    break;
+                }
+            }
+            return resultado;
         }
+
+        public void AgregarEvaluador(IEvaluador pEvaulador)
+        {
+            this.evaluadores.Add(pEvaulador);
+        }
+
     }
 }

@@ -36,8 +36,10 @@ namespace Ej3
         }
         public TipoCliente TipoCliente
         {
+            set { this.iTipoCliente=value; }
             get { return this.iTipoCliente; }
         }
+
         public Empleo Empleo
         {
             get { return this.iEmpleo; }

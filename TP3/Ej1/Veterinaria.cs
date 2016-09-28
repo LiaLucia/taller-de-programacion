@@ -9,10 +9,10 @@ namespace Ej1
     class Veterinaria
     {
 
-        public void AceptarAnimal(Animal[] animales)
+        public void AceptarAnimal(Animal[] pAnimales)
         {
             
-            foreach (Animal animal in animales)
+            foreach (Animal animal in pAnimales)
             {
                 animal.HacerRuido();
             }

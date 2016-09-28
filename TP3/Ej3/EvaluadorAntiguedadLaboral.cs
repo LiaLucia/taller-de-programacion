@@ -10,11 +10,11 @@ namespace Ej3
     {
         private int iAntiguedadMinima;
 
-        public override EvaluadorAntiguedadLaboral(int pAntiguedadMinima)
+        public EvaluadorAntiguedadLaboral(int pAntiguedadMinima)
         {
             this.iAntiguedadMinima = pAntiguedadMinima;
         }
-        public Boolean EsValida(SolicitudPrestamo pSolicitud)
+        public bool EsValida(SolicitudPrestamo pSolicitud)
         {
             if ((DateTime.Today-pSolicitud.Cliente.Empleo.FechaIngreso).TotalDays >= this.iAntiguedadMinima*365)
             {

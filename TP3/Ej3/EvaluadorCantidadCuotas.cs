@@ -14,7 +14,7 @@ namespace Ej3
         {
             this.iCantidadMaximaCuotas = pCantidadMaximaCuotas;
         }
-        public override Boolean EsValida(SolicitudPrestamo pSolicitud)
+        public bool EsValida(SolicitudPrestamo pSolicitud)
         {
 
             if (pSolicitud.CantidadCuotas<=this.iCantidadMaximaCuotas)

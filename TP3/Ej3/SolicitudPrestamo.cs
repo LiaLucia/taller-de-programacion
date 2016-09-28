@@ -30,27 +30,5 @@ namespace Ej3
         {
             get { return this.iCantidadCuotas; }
         }
-
-     /*  int cantMaximaCuotas;
-        int opc = (int)pSolicitud.Cliente.TipoCliente;
-            switch (opc)
-            {
-                case 0:
-                    cantMaximaCuotas = 12;
-                    break;
-                case 1:
-                    cantMaximaCuotas = 32;
-                    break;
-                case 2:
-                    cantMaximaCuotas = 60;
-                    break;
-                case 3:
-                    cantMaximaCuotas = 60;
-                    break;
-                default:
-                    cantMaximaCuotas = 12;
-                    break;
-            }
-            this.iCantidadMaximaCuotas = cantMaximaCuotas;*/
     }
 }

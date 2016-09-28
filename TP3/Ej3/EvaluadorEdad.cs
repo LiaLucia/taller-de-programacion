@@ -16,7 +16,7 @@ namespace Ej3
             this.iEdadMinima = pEdadMinima;
             this.iEdadMaxima = pEdadMaxima;
         }
-        public override Boolean EsValida(SolicitudPrestamo pSolicitud)
+        public bool EsValida(SolicitudPrestamo pSolicitud)
         {
             if (pSolicitud.Cliente.FechaNacimiento.Year>=this.iEdadMinima & pSolicitud.Cliente.FechaNacimiento.Year <= this.iEdadMinima)
             {

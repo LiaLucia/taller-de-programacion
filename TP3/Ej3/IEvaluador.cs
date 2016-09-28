@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ej3
 {
-    class  IEvaluador 
+    interface  IEvaluador 
     {
-        public virtual Boolean EsValida(SolicitudPrestamo pSolicitud)
-        { return true;   }
+        bool EsValida(SolicitudPrestamo pSolicitud);
+        
     }
 }

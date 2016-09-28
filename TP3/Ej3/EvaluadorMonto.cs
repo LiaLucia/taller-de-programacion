@@ -14,7 +14,7 @@ namespace Ej3
         {
             this.iMontoMaximo = pMontoMaximo;
         }
-        public override Boolean EsValida(SolicitudPrestamo pSolicitud)
+        public bool EsValida(SolicitudPrestamo pSolicitud)
         {
             if (pSolicitud.Monto <= this.iMontoMaximo)
             {
