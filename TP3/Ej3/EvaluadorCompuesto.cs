@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Ej3
 {
-    class EvaluadorCompuesto
+    class EvaluadorCompuesto : IEvaluador
     {
+        private IEvaluador iEvaluadores;
+        public EvaluadorCompuesto()
+        {
+
+        }
     }
 }

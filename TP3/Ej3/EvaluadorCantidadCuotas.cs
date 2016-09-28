@@ -8,5 +8,22 @@ namespace Ej3
 {
     class EvaluadorCantidadCuotas : IEvaluador
     {
+        private int iCantidadMaximaCuotas;
+
+        public EvaluadorCantidadCuotas(int pCantidadMaximaCuotas)
+        {
+            this.iCantidadMaximaCuotas = pCantidadMaximaCuotas;
+        }
+        public override Boolean EsValida(SolicitudPrestamo pSolicitud)
+        {
+
+            if (pSolicitud.CantidadCuotas<=this.iCantidadMaximaCuotas)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
     }
 }

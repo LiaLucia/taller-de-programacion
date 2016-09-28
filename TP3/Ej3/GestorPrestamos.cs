@@ -8,5 +8,15 @@ namespace Ej3
 {
     class GestorPrestamos
     {
+        private IEvaluador iEvaluadorPorcliente;
+
+        public GestorPrestamos(IEvaluador pEvaluador)
+        {
+            this.iEvaluadorPorcliente = pEvaluador;
+        }
+        public Boolean EsValida(SolicitudPrestamo pSolicitud)
+        {
+            return this.iEvaluadorPorcliente.EsValida(pSolicitud);
+        }
     }
 }

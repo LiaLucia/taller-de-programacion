@@ -6,8 +6,5 @@ using System.Threading.Tasks;
 
 namespace Ej3
 {
-    class TipoCliente
-    {
-        enum TipoDocumento { NoCliente, Cliente, ClienteGold, ClientePlatinum};
-    }
+    enum TipoCliente { NoCliente, Cliente, ClienteGold, ClientePlatinum };
 }
