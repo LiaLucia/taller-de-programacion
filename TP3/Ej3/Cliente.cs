@@ -14,8 +14,9 @@ namespace Ej3
         private TipoCliente iTipoCliente;
         private Empleo iEmpleo;
 
-        public Cliente(string pnombre,string pApellido, DateTime pFechaNacimiento, Empleo pEmpleo)
+        public Cliente(string pnombre,string pApellido, DateTime pFechaNacimiento, TipoCliente pTipoCliente,Empleo pEmpleo)
         {
+            this.iTipoCliente = pTipoCliente;
             this.iNombre = pnombre;
             this.iApellido = pApellido;
             this.iFechaNacimiento = pFechaNacimiento;

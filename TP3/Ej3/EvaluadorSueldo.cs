@@ -14,6 +14,7 @@ namespace Ej3
         {
             this.iSuledoMinimo = pSueldoMinimo;
         }
+
         public bool EsValida (SolicitudPrestamo pSolicitud)
         {
             if (pSolicitud.Cliente.Empleo.Sueldo>=this.iSuledoMinimo)

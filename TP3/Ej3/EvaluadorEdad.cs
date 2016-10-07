@@ -18,7 +18,8 @@ namespace Ej3
         }
         public bool EsValida(SolicitudPrestamo pSolicitud)
         {
-            if (pSolicitud.Cliente.FechaNacimiento.Year>=this.iEdadMinima & pSolicitud.Cliente.FechaNacimiento.Year <= this.iEdadMinima)
+            int edad = DateTime.Today.Year-pSolicitud.Cliente.FechaNacimiento.Year;
+            if (edad>=this.iEdadMinima && edad<= this.iEdadMaxima)
             {
                 return true;
             }

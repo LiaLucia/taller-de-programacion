@@ -17,7 +17,7 @@ namespace Ej3
         public bool EsValida(SolicitudPrestamo pSolicitud)
         {
 
-            if (pSolicitud.CantidadCuotas<=this.iCantidadMaximaCuotas)
+            if (pSolicitud.CantidadCuotas <= this.iCantidadMaximaCuotas)
             {
                 return true;
             }
@@ -25,5 +25,6 @@ namespace Ej3
             {
                 return false;
             }
+        }
     }
 }

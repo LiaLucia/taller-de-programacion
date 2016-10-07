@@ -8,45 +8,80 @@ namespace Ej3
 {
     class GestorPrestamos
     {
-        private IDictionary<TipoCliente,IEvaluador> iEvaluadorPorcliente;
+        private Dictionary<TipoCliente,IEvaluador> iEvaluadorPorcliente;
 
         public GestorPrestamos()
+        {
+            this.iEvaluadorPorcliente = new Dictionary<TipoCliente, IEvaluador>();
+            this.iEvaluadorPorcliente.Add(TipoCliente.NoCliente, EvaluadorNoCliente());
+            this.iEvaluadorPorcliente.Add(TipoCliente.Cliente, EvaluadorCliente());
+            this.iEvaluadorPorcliente.Add(TipoCliente.ClienteGold, EvaluadorClienteGold());
+            this.iEvaluadorPorcliente.Add(TipoCliente.ClientePremium, EvaluadorClientePremium());
+        }
+
+
+        public IEvaluador EvaluadorNoCliente()
         {
             EvaluadorCompuesto pEvaluadorCompuesto = new EvaluadorCompuesto();
             EvaluadorAntiguedadLaboral pEvaluadorAntiguedadLaboral = new EvaluadorAntiguedadLaboral(6);
             EvaluadorEdad pEvaluadorEdad = new EvaluadorEdad(18, 75);
             EvaluadorSueldo pEvaluadorSueldo = new EvaluadorSueldo(5000);
+            EvaluadorMonto pEvaluadorMonto = new EvaluadorMonto(20000);
+            EvaluadorCantidadCuotas pEvaluadorCantidadCuotas = new EvaluadorCantidadCuotas(12);
             pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorAntiguedadLaboral);
             pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorEdad);
             pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorSueldo);
-            //No Cliente
-            EvaluadorCompuesto pEvaluador0 = pEvaluadorCompuesto;
-            EvaluadorMonto pEvaluadorMonto = new EvaluadorMonto(20000);
-            EvaluadorCantidadCuotas pEvaluadorCantidadCuotas = new EvaluadorCantidadCuotas(12);
-            pEvaluador0.AgregarEvaluador(pEvaluadorMonto);
-            pEvaluador0.AgregarEvaluador(pEvaluadorCantidadCuotas);
-            this.iEvaluadorPorcliente.Add(TipoCliente.NoCliente,pEvaluador0);
-            //Cliente
-            EvaluadorCompuesto pEvaluador1 = pEvaluadorCompuesto;
-            pEvaluadorMonto = new EvaluadorMonto(100000);
-            pEvaluadorCantidadCuotas = new EvaluadorCantidadCuotas(32);
-            pEvaluador1.AgregarEvaluador(pEvaluadorMonto);
-            pEvaluador1.AgregarEvaluador(pEvaluadorCantidadCuotas);
-            this.iEvaluadorPorcliente.Add(TipoCliente.Cliente, pEvaluador1);
-            //Cliente Gold
-            EvaluadorCompuesto pEvaluador2 = pEvaluadorCompuesto;
-            pEvaluadorMonto = new EvaluadorMonto(150000);
-            pEvaluadorCantidadCuotas = new EvaluadorCantidadCuotas(60);
-            pEvaluador1.AgregarEvaluador(pEvaluadorMonto);
-            pEvaluador1.AgregarEvaluador(pEvaluadorCantidadCuotas);
-            this.iEvaluadorPorcliente.Add(TipoCliente.ClienteGold, pEvaluador2);
-            //Cliente Platinum
-            EvaluadorCompuesto pEvaluador3 = pEvaluadorCompuesto;
-            pEvaluadorMonto = new EvaluadorMonto(200000);
-            pEvaluador1.AgregarEvaluador(pEvaluadorMonto);
-            pEvaluador1.AgregarEvaluador(pEvaluadorCantidadCuotas);
-            this.iEvaluadorPorcliente.Add(TipoCliente.ClientePlatinum, pEvaluador3);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorMonto);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorCantidadCuotas);
+            return pEvaluadorCompuesto;
+        }
 
+        public IEvaluador EvaluadorCliente()
+        {
+            EvaluadorCompuesto pEvaluadorCompuesto = new EvaluadorCompuesto();
+            EvaluadorAntiguedadLaboral pEvaluadorAntiguedadLaboral = new EvaluadorAntiguedadLaboral(6);
+            EvaluadorEdad pEvaluadorEdad = new EvaluadorEdad(18, 75);
+            EvaluadorSueldo pEvaluadorSueldo = new EvaluadorSueldo(5000);
+            EvaluadorMonto pEvaluadorMonto = new EvaluadorMonto(100000);
+            EvaluadorCantidadCuotas pEvaluadorCantidadCuotas = new EvaluadorCantidadCuotas(32);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorMonto);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorAntiguedadLaboral);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorEdad);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorSueldo);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorCantidadCuotas);
+            return pEvaluadorCompuesto;
+        }
+
+        public IEvaluador EvaluadorClienteGold()
+        {
+            EvaluadorCompuesto pEvaluadorCompuesto = new EvaluadorCompuesto();
+            EvaluadorAntiguedadLaboral pEvaluadorAntiguedadLaboral = new EvaluadorAntiguedadLaboral(6);
+            EvaluadorEdad pEvaluadorEdad = new EvaluadorEdad(18, 75);
+            EvaluadorSueldo pEvaluadorSueldo = new EvaluadorSueldo(5000);
+            EvaluadorMonto pEvaluadorMonto = new EvaluadorMonto(150000);
+            EvaluadorCantidadCuotas pEvaluadorCantidadCuotas = new EvaluadorCantidadCuotas(60);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorAntiguedadLaboral);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorEdad);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorSueldo);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorMonto);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorCantidadCuotas);
+            return pEvaluadorCompuesto;
+        }
+        
+        public IEvaluador EvaluadorClientePremium()
+        {
+            EvaluadorCompuesto pEvaluadorCompuesto = new EvaluadorCompuesto();
+            EvaluadorAntiguedadLaboral pEvaluadorAntiguedadLaboral = new EvaluadorAntiguedadLaboral(6);
+            EvaluadorEdad pEvaluadorEdad = new EvaluadorEdad(18, 75);
+            EvaluadorSueldo pEvaluadorSueldo = new EvaluadorSueldo(5000);
+            EvaluadorCantidadCuotas pEvaluadorCantidadCuotas = new EvaluadorCantidadCuotas(60);
+            EvaluadorMonto pEvaluadorMonto = new EvaluadorMonto(200000);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorAntiguedadLaboral);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorEdad);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorSueldo);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorMonto);
+            pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorCantidadCuotas);
+            return pEvaluadorCompuesto;
         }
 
         public bool EsValida(SolicitudPrestamo pSolicitud)
