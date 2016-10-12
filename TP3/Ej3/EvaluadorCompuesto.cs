@@ -18,13 +18,11 @@ namespace Ej3
         public bool EsValida(SolicitudPrestamo pSolicitud)
         {
             bool resultado = true;
-            foreach(IEvaluador evaluador in evaluadores)
+            IEnumerator<IEvaluador> enumerador = this.evaluadores.GetEnumerator();
+            while (resultado && enumerador.MoveNext())
             {
-                if (evaluador.EsValida(pSolicitud)==false)
-                {
-                    resultado = false;
-                    break;
-                }
+                resultado = enumerador.Current.EsValida(pSolicitud);
+
             }
             return resultado;
         }

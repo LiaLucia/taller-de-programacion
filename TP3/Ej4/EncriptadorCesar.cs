@@ -10,21 +10,17 @@ namespace Ej4
     {
         private int iDesplazamiento;
         private char[] letras = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z'};
+        private char[] LETRAS = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
         private char[] numeros = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
 
         public override string Encriptar(string pCadena)
         {
-            string cadena="";
+            string cadena = "";
             int j;
-            string unaCadena = pCadena.ToLower();
-            foreach (char letra in unaCadena)
+            foreach (char letra in pCadena)
             {
-                if (letra==' ')
-                {
-                    cadena +=' ';
-                }
-                else
+                if (letras.Contains(letra))
                 {
                     for (int t = 0; t < numeros.Length; t++)
                     {
@@ -41,25 +37,57 @@ namespace Ej4
                             cadena += letras[j];
                         }
                     }
-                    for (int i = 0; i < letras.Length; i++)
+                }
+                else
+                {
+                    if (LETRAS.Contains(letra))
                     {
-                        if (letra == letras[i])
+                        for (int t = 0; t < numeros.Length; t++)
                         {
-                            if (i + this.iDesplazamiento > letras.Length)
+                            if (letra == numeros[t])
                             {
-                                j = i + this.iDesplazamiento - letras.Length;
+                                if (t + this.iDesplazamiento > numeros.Length)
+                                {
+                                    j = t + this.iDesplazamiento - numeros.Length;
+                                }
+                                else
+                                {
+                                    j = t + this.iDesplazamiento;
+                                }
+                                cadena += letras[j];
                             }
-                            else
-                            {
-                                j = i + this.iDesplazamiento;
-                            }
-                            cadena += letras[j];
                         }
                     }
+                    else
+                    {
+                        if (numeros.Contains(letra))
+                        {
+                            for (int i = 0; i < letras.Length; i++)
+                            {
+                                if (letra == letras[i])
+                                {
+                                    if (i + this.iDesplazamiento > letras.Length)
+                                    {
+                                        j = i + this.iDesplazamiento - letras.Length;
+                                    }
+                                    else
+                                    {
+                                        j = i + this.iDesplazamiento;
+                                    }
+                                    cadena += letras[j];
+                                }
+                            }
+                        }
+                        else
+                        {
+                            cadena += letra;
+                        }
+                        }
                 }
             }
-            return cadena;
+                return cadena;
         }
+
 
 
         public override string Desencriptar(string pCadena)
