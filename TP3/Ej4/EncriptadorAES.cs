@@ -33,13 +33,6 @@ namespace Ej4
 
         static string EncryptStringToBytes_Aes(string plainText, byte[] Key,byte[] IV)
         {
-            // Check arguments.
-            if (plainText == null || plainText.Length <= 0)
-                throw new ArgumentNullException("plainText");
-            if (Key == null || Key.Length <= 0)
-                throw new ArgumentNullException("Key");
-            if (IV == null || IV.Length <= 0)
-                throw new ArgumentNullException("IV");
             string encrypted;
             // Create an Aes object
             // with the specified key and IV.
@@ -75,14 +68,6 @@ namespace Ej4
 
         static string DecryptStringFromBytes_Aes(string cipherText, byte[] Key, byte[] IV)
         {
-            // Check arguments.
-            if (cipherText == null || cipherText.Length <= 0)
-                throw new ArgumentNullException("cipherText");
-            if (Key == null || Key.Length <= 0)
-                throw new ArgumentNullException("Key");
-            if (IV == null || IV.Length <= 0)
-                throw new ArgumentNullException("IV");
-
             // Declare the string used to hold
             // the decrypted text.
             string plaintext = null;

@@ -9,130 +9,120 @@ namespace Ej4
     public class EncriptadorCesar : Encriptador
     {
         private int iDesplazamiento;
-        private char[] letras = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z'};
-        private char[] LETRAS = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
-        private char[] numeros = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
 
         public override string Encriptar(string pCadena)
         {
             string cadena = "";
-            int j;
-            foreach (char letra in pCadena)
+            int ascii;
+            foreach (char caracter in pCadena)
             {
-                if (letras.Contains(letra))
+                 ascii = Encoding.ASCII.GetBytes(caracter.ToString())[0];
+                if (ascii >= 65 && ascii <= 90)
                 {
-                    for (int t = 0; t < numeros.Length; t++)
+                    if (ascii + this.iDesplazamiento > 90)
                     {
-                        if (letra == numeros[t])
-                        {
-                            if (t + this.iDesplazamiento > numeros.Length)
-                            {
-                                j = t + this.iDesplazamiento - numeros.Length;
-                            }
-                            else
-                            {
-                                j = t + this.iDesplazamiento;
-                            }
-                            cadena += letras[j];
-                        }
-                    }
-                }
-                else
-                {
-                    if (LETRAS.Contains(letra))
-                    {
-                        for (int t = 0; t < numeros.Length; t++)
-                        {
-                            if (letra == numeros[t])
-                            {
-                                if (t + this.iDesplazamiento > numeros.Length)
-                                {
-                                    j = t + this.iDesplazamiento - numeros.Length;
-                                }
-                                else
-                                {
-                                    j = t + this.iDesplazamiento;
-                                }
-                                cadena += letras[j];
-                            }
-                        }
+                        ascii = 91+65- ascii -this.iDesplazamiento;
                     }
                     else
                     {
-                        if (numeros.Contains(letra))
+                        ascii += this.iDesplazamiento;
+                    }
+                    cadena+= (char)ascii;
+                }
+                else
+                {
+                    if (ascii >= 97 && ascii <= 122)
+                    {
+                        if (ascii + this.iDesplazamiento > 122)
                         {
-                            for (int i = 0; i < letras.Length; i++)
-                            {
-                                if (letra == letras[i])
-                                {
-                                    if (i + this.iDesplazamiento > letras.Length)
-                                    {
-                                        j = i + this.iDesplazamiento - letras.Length;
-                                    }
-                                    else
-                                    {
-                                        j = i + this.iDesplazamiento;
-                                    }
-                                    cadena += letras[j];
-                                }
-                            }
+                            ascii = 97 + 123 - ascii - this.iDesplazamiento;
                         }
                         else
                         {
-                            cadena += letra;
+                            ascii += this.iDesplazamiento;
                         }
+                        cadena+= (char)ascii;
+                    }
+                
+                    else
+                    {
+                        if (ascii >= 48 && ascii <= 57)
+                        {
+                            if (ascii + this.iDesplazamiento > 57)
+                            {
+                                ascii = 48+ 58 - ascii -this.iDesplazamiento;
+                            }
+                            else
+                            {
+                                ascii += this.iDesplazamiento;
+                            }
+                            cadena+= (char)ascii;
                         }
+                        else
+                        {
+                            cadena += (char)ascii;
+                        }
+                    }
                 }
             }
                 return cadena;
         }
 
 
-
         public override string Desencriptar(string pCadena)
         {
             string cadena = "";
             int j;
-            string unaCadena = pCadena.ToLower();
-            foreach (char letra in unaCadena)
+            foreach (char caracter in pCadena)
             {
-                if (letra == ' ')
+                int ascii = Encoding.ASCII.GetBytes(caracter.ToString())[0];
+                if (ascii >= 65 && ascii <= 90)
                 {
-                    cadena += ' ';
+                    if (ascii - this.iDesplazamiento <65)
+                    {
+                        ascii = 91 - (65 -ascii + this.iDesplazamiento);
+                    }
+                    else
+                    {
+                        ascii -= this.iDesplazamiento;
+                    }
+                    cadena += (char)ascii;
                 }
                 else
                 {
-                    for (int t = 0; t < numeros.Length; t++)
+                    if (ascii >= 97 && ascii <= 122)
                     {
-                        if (letra == numeros[t])
+                        if (ascii - this.iDesplazamiento < 97)
                         {
-                            if (t - this.iDesplazamiento < 0)
+                            ascii = 123 - (97- ascii + this.iDesplazamiento);
+                        }
+                        else
+                        {
+                            ascii -= this.iDesplazamiento;
+                        }
+                        cadena += (char)ascii;
+                    }
+                    else
+                    {
+                        if (ascii >= 48 && ascii <= 57)
+                        {
+                            if (ascii - this.iDesplazamiento < 48)
                             {
-                                j = numeros.Length +( t - this.iDesplazamiento);
+                                ascii = 58 - (48 - ascii + this.iDesplazamiento);
                             }
                             else
                             {
-                                j = t - this.iDesplazamiento;
+                                ascii -= this.iDesplazamiento;
                             }
-                            cadena += letras[j];
+                            cadena += (char)ascii;
                         }
-                    }
-                    for (int i = 0; i < letras.Length; i++)
-                    {
-                        if (letra == letras[i])
+                        else
                         {
-                            if (i + this.iDesplazamiento > letras.Length)
-                            {
-                                j = i + this.iDesplazamiento - letras.Length;
-                            }
-                            else
-                            {
-                                j = i + this.iDesplazamiento;
-                            }
-                            cadena += letras[j];
+                            cadena += (char)ascii;
                         }
                     }
+         
                 }
             }
             return cadena;
