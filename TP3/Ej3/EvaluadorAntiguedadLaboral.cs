@@ -16,7 +16,7 @@ namespace Ej3
         }
         public bool EsValida(SolicitudPrestamo pSolicitud)
         {
-            if ((DateTime.Today-pSolicitud.Cliente.Empleo.FechaIngreso).TotalDays >= this.iAntiguedadMinima*365)
+            if ((DateTime.Today-pSolicitud.Cliente.Empleo.FechaIngreso).TotalDays >= this.iAntiguedadMinima*12)
             {
                 return true;
             }

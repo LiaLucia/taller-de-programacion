@@ -26,7 +26,7 @@ namespace Ej3
                     Cliente cliente1 = fachada.CrearCliente("Estaban", "Quito", new DateTime(1984, 11, 12), TipoCliente.Cliente, maestroMayorObra);
                     Cliente cliente2 = fachada.CrearCliente("Maxi", "Rodriguez", new DateTime(1978, 1, 15), TipoCliente.NoCliente, teleMarketing);
                     Cliente cliente3 = fachada.CrearCliente("Jose", "Klose", new DateTime(1969, 2, 20), TipoCliente.ClienteGold, juez);
-                    Cliente cliente4 = fachada.CrearCliente("Leonel", "Messi", new DateTime(1990, 4, 8), TipoCliente.ClientePremium, futbolista);
+                    Cliente cliente4 = fachada.CrearCliente("Leonel", "Messi", new DateTime(1990, 4, 8), TipoCliente.ClientePlatinum, futbolista);
                     listaCliente.Add(1, cliente1);
                     listaCliente.Add(2, cliente2);
                     listaCliente.Add(3, cliente3);

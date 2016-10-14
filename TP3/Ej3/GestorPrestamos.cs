@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+//Hace que sea visible para el Testing
+[assembly: InternalsVisibleTo("PruebasEJ3")]
 namespace Ej3
 {
     class GestorPrestamos
@@ -16,7 +19,7 @@ namespace Ej3
             this.iEvaluadorPorcliente.Add(TipoCliente.NoCliente, EvaluadorNoCliente());
             this.iEvaluadorPorcliente.Add(TipoCliente.Cliente, EvaluadorCliente());
             this.iEvaluadorPorcliente.Add(TipoCliente.ClienteGold, EvaluadorClienteGold());
-            this.iEvaluadorPorcliente.Add(TipoCliente.ClientePremium, EvaluadorClientePremium());
+            this.iEvaluadorPorcliente.Add(TipoCliente.ClientePlatinum, EvaluadorClientePremium());
         }
 
 

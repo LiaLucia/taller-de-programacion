@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 namespace Ej1
 {
     class Veterinaria
-    {
+    {/// <summary>
+    /// Clase que instancia objetos de la clase animal
+    /// </summary>
+    /// <param name="pAnimales"> Vector donde se encuentran los animales </param>
 
         public void AceptarAnimal(Animal[] pAnimales)
         {

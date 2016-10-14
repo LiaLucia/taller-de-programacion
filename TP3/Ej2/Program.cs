@@ -9,7 +9,8 @@ namespace Ej2
     class Program
     {
         static void Main(string[] args)
-        {
+        { 
+             
             Animal[] animales = new Animal[6];
             animales[0] = new Perro();
             animales[1] = new Gato();
