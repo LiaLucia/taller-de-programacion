@@ -39,5 +39,15 @@ namespace Ej4
             IEncriptador eNull = instancia.GetEncriptador("Null");
             return eNull.Desencriptar(pCadena);
         }
+        public string EncriptarTripleDES(string pCadena)
+        {
+            IEncriptador tripleDES = instancia.GetEncriptador("TripleDES");
+            return tripleDES.Encriptar(pCadena);
+        }
+        public string DesencriptarTripleDES(string pCadena)
+        {
+            IEncriptador tripleDES = instancia.GetEncriptador("TripleDES");
+            return tripleDES.Desencriptar(pCadena);
+        }
     }
 }

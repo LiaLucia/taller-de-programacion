@@ -22,6 +22,7 @@ namespace Ej4
                     Console.WriteLine("1- Cesar");
                     Console.WriteLine("2- AES");
                     Console.WriteLine("3- Nulo");
+                    Console.WriteLine("4- Triple DES");
                     Console.WriteLine("0- Salir");
                     int.TryParse(Console.ReadLine(), out opc);
                 }
@@ -65,6 +66,12 @@ namespace Ej4
                         encriptada = fachada.EncriptarNulo(cadena);
                         Console.WriteLine("La cadena encriptada es: " + encriptada);
                         cadena = fachada.DesencriptarNulo(encriptada);
+                        Console.WriteLine("Y la cadena desencriptada es: " + cadena);
+                        break;
+                    case 4:
+                        encriptada = fachada.EncriptarTripleDES(cadena);
+                        Console.WriteLine("La cadena encriptada es: " + encriptada);
+                        cadena = fachada.DesencriptarTripleDES(encriptada);
                         Console.WriteLine("Y la cadena desencriptada es: " + cadena);
                         break;
                     default:

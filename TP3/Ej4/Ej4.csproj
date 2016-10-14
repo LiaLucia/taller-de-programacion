@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Encriptador.cs" />
+    <Compile Include="EncriptadorTripleDES.cs" />
     <Compile Include="EncriptadorAES.cs" />
     <Compile Include="EncriptadorCesar.cs" />
     <Compile Include="EncriptadorNulo.cs" />

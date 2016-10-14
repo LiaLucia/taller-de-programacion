@@ -73,7 +73,6 @@ namespace Ej4
         public override string Desencriptar(string pCadena)
         {
             string cadena = "";
-            int j;
             foreach (char caracter in pCadena)
             {
                 int ascii = Encoding.ASCII.GetBytes(caracter.ToString())[0];

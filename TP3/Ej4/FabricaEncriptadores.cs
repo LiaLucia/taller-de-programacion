@@ -16,6 +16,7 @@ namespace Ej4
             IEncriptadores.Add("Cesar", new EncriptadorCesar(3));
             IEncriptadores.Add("AES", new EncriptadorAES());
             IEncriptadores.Add("Null", new EncriptadorNulo());
+            IEncriptadores.Add("TripleDES", new EncriptadorTripleDES());
 
         }
 
