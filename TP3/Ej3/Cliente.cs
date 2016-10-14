@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-//Hace que sea visible para el Testing
+//Hace que sea visible para el Testing  
 [assembly: InternalsVisibleTo("PruebasEJ3")]
 
 namespace Ej3
