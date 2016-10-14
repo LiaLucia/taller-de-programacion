@@ -7,20 +7,27 @@ using System.Security.Cryptography;
 
 namespace Ej4
 {
+    /// <summary>
+    /// Triple Digital Encryption Standard, Encriptador Concreto 
+    /// </summary>
     class EncriptadorTripleDES : Encriptador
     {
+        /// <summary>
+        /// Clave del encriptador
+        /// </summary>
         string key = "ABCDEFG54669525PQRSTUVWXYZabcdef852846opqrstuvwxyz";
 
         public EncriptadorTripleDES(): base("TripleDES")  {  }
     
+        /// <summary>
+        /// Algoritmo de encriptacion, utiliza Algoritmo MD5 Para encriptar la clave
+        /// </summary>
+        /// <param name="pCadena">cadena a encriptar</param>
+        /// <returns>cadena encriptada</returns>
         public override string Encriptar(string pCadena)
 
 	        {
-	            //arreglo de bytes donde guardaremos la llave
-
 	            byte[] keyArray;
-
-	            //arreglo de bytes donde guardaremos el texto que vamos a encriptar
 
 	            byte[] Arreglo_a_Cifrar =UTF8Encoding.UTF8.GetBytes(pCadena);
             
@@ -32,6 +39,7 @@ namespace Ej4
 
 	            keyArray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
 	            hashmd5.Clear();
+
 	            //Algoritmo 3DAS
 	            TripleDESCryptoServiceProvider tdes =new TripleDESCryptoServiceProvider();
                 tdes.Key = keyArray;
@@ -44,14 +52,18 @@ namespace Ej4
 	            //arreglo de bytes donde se guarda la cadena cifrada
 
 	            byte[] ArrayResultado =cTransform.TransformFinalBlock(Arreglo_a_Cifrar,0, Arreglo_a_Cifrar.Length);
-            tdes.Clear();
+                tdes.Clear();
 	            //se regresa el resultado en forma de una cadena
 
 	            return Convert.ToBase64String(ArrayResultado,0, ArrayResultado.Length);
         }
 
 	 
-
+            /// <summary>
+            /// Algoritmo de desencriptacion, debe desencriptar la clave con el algoritmo MD5 usado en la encriptacion
+            /// </summary>
+            /// <param name="pCadena">clave encriptada</param>
+            /// <returns>cadena original</returns>
 	        public override string Desencriptar(string pCadena)
 
 	        {

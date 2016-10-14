@@ -7,35 +7,26 @@ using System.IO;
 using System.Security.Cryptography;
 
 namespace Ej4
-{
+{   
+    /// <summary>
+    /// Advanced Encryption Standard concreto que utiliza librerias del Framework
+    /// </summary>
     class EncriptadorAES : Encriptador
     {
 
         public EncriptadorAES() : base("AES") { }
 
 
-
+        /// <summary>
+        /// Algoritmo de Encriptacion
+        /// </summary>
+        /// <param name="clearText">Cadena a encriptar</param>
+        /// <returns>Clave encriptada</returns>
         public override string Encriptar(string pCadena)
-        {
-            using (Aes pAes = Aes.Create())
-            {
-               return EncriptarTexto(pCadena);
-            }
-
-        }
-        public override string Desencriptar(string pCadena)
-        {
-            using (Aes pAes = Aes.Create())
-            {
-                return DesencriptarTexto(pCadena);
-            }
-        }
-
-        public static string EncriptarTexto(string clearText)
         {
             //Se crea una clave de encriptacion y se obtienen los bytes de la cadena.
             string EncryptionKey = "abc123";
-            byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
+            byte[] clearBytes = Encoding.Unicode.GetBytes(pCadena);
 
             //Usando la clase AES, se crea un ecriptador.
             using (Aes encryptor = Aes.Create())
@@ -57,16 +48,21 @@ namespace Ej4
                         cs.Close();
                     }
                     //Convierte el texto encriptado en bytes a un string.
-                    clearText = Convert.ToBase64String(ms.ToArray());
+                    pCadena = Convert.ToBase64String(ms.ToArray());
                 }
             }
-            return clearText;
+            return pCadena;
         }
-        public static string DesencriptarTexto(string cipherText)
+        /// <summary>
+        /// Algoritmo de Desencriptacion
+        /// </summary>
+        /// <param name="pCadena"> Clave encriptada</param>
+        /// <returns>Cadena original</returns>
+        public override string Desencriptar(string pCadena)
         {
             string EncryptionKey = "abc123";
-            cipherText = cipherText.Replace(" ", "+");
-            byte[] cipherBytes = Convert.FromBase64String(cipherText);
+            pCadena = pCadena.Replace(" ", "+");
+            byte[] cipherBytes = Convert.FromBase64String(pCadena);
             using (Aes encryptor = Aes.Create())
             {
                 Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
@@ -79,10 +75,10 @@ namespace Ej4
                         cs.Write(cipherBytes, 0, cipherBytes.Length);
                         cs.Close();
                     }
-                    cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                    pCadena = Encoding.Unicode.GetString(ms.ToArray());
                 }
             }
-            return cipherText;
+            return pCadena;
         }
    
     }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ej4
 {
+    /// <summary>
+    /// Encriptador Nulo, Devuelve la cadena original, no puede ser heredada
+    /// </summary>
     sealed class  EncriptadorNulo : Encriptador
     {
         public override string Encriptar(string pCadena)

@@ -6,20 +6,33 @@ using System.Threading.Tasks;
 
 namespace Ej4
 {
+    /// <summary>
+    /// Encriptador Concreto, utiliza un desplazamiento que se aplica a las letras y numeros de la cadena 
+    /// </summary>
     public class EncriptadorCesar : Encriptador
     {
         private int iDesplazamiento;
 
-
+        public EncriptadorCesar(int pDesplazamiento) : base("Cesar")
+        {
+            this.iDesplazamiento = pDesplazamiento;
+        }
+        /// <summary>
+        /// Algoritmo de encriptacion
+        /// </summary>
+        /// <param name="pCadena"></param>
+        /// <returns></returns>
         public override string Encriptar(string pCadena)
         {
             string cadena = "";
             int ascii;
             foreach (char caracter in pCadena)
             {
+                //Convierte el caracter en codigo ascii y luego le agrega o no desplazamiento, lo reconvierte en caracter y lo concatena a una nueva cadena
                  ascii = Encoding.ASCII.GetBytes(caracter.ToString())[0];
                 if (ascii >= 65 && ascii <= 90)
                 {
+                    // Si el caracter sale del rango de letras vuelve al comienzo. Ej: z-->c
                     if (ascii + this.iDesplazamiento > 90)
                     {
                         ascii = 91+65- ascii -this.iDesplazamiento;
@@ -127,10 +140,5 @@ namespace Ej4
             return cadena;
         }
 
-
-        public EncriptadorCesar(int pDesplazamiento): base("Cesar")
-        {
-            this.iDesplazamiento = pDesplazamiento;
-        }
     }
 }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ej4
 {
+    /// <summary>
+    /// Menu de consola con los distintos encriptadores para aplicarlos a una cadena
+    /// </summary>
     class Program
     {
         static Fachada fachada = new Fachada();

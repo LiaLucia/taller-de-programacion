@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ej4
 {
+    /// <summary>
+    /// Clase que posee un diccionario con los distintos encriptadores, utiliza el patron singleton
+    /// </summary>
     public class FabricaEncriptadores
     {
         private static readonly Lazy<FabricaEncriptadores> cInstancia = new Lazy<FabricaEncriptadores>(() => new FabricaEncriptadores());
