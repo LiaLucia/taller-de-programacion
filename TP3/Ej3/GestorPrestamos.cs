@@ -6,10 +6,19 @@ using System.Threading.Tasks;
 
 namespace Ej3
 {
+    /// <summary>
+    /// Gestor de prestamos al cual se le pide la evaluacion de la solicitud
+    /// </summary>
     class GestorPrestamos
     {
+        /// <summary>
+        /// Diccionario de los distintos evaluadores segun el tipo de cliente
+        /// </summary>
         private Dictionary<TipoCliente,IEvaluador> iEvaluadorPorcliente;
 
+        /// <summary>
+        /// constructor de la clase que genera y agrega al diccionario los distintos evaluadores por tipo de cliente
+        /// </summary>
         public GestorPrestamos()
         {
             this.iEvaluadorPorcliente = new Dictionary<TipoCliente, IEvaluador>();
@@ -19,7 +28,10 @@ namespace Ej3
             this.iEvaluadorPorcliente.Add(TipoCliente.ClientePremium, EvaluadorClientePremium());
         }
 
-
+        /// <summary>
+        /// Inicia todos los evaluadores simples con sus requerimientos para el NoCliente y los añade al Compuesto
+        /// </summary>
+        /// <returns></returns>
         public IEvaluador EvaluadorNoCliente()
         {
             EvaluadorCompuesto pEvaluadorCompuesto = new EvaluadorCompuesto();
@@ -36,6 +48,10 @@ namespace Ej3
             return pEvaluadorCompuesto;
         }
 
+        /// <summary>
+        /// Inicia todos los evaluadores simples con sus requerimientos para el Cliente y los añade al Compuesto
+        /// </summary>
+        /// <returns></returns>
         public IEvaluador EvaluadorCliente()
         {
             EvaluadorCompuesto pEvaluadorCompuesto = new EvaluadorCompuesto();
@@ -52,6 +68,10 @@ namespace Ej3
             return pEvaluadorCompuesto;
         }
 
+        /// <summary>
+        /// Inicia todos los evaluadores simples con sus requerimientos para el ClienteGold y los añade al Compuesto
+        /// </summary>
+        /// <returns></returns>
         public IEvaluador EvaluadorClienteGold()
         {
             EvaluadorCompuesto pEvaluadorCompuesto = new EvaluadorCompuesto();
@@ -67,7 +87,11 @@ namespace Ej3
             pEvaluadorCompuesto.AgregarEvaluador(pEvaluadorCantidadCuotas);
             return pEvaluadorCompuesto;
         }
-        
+
+        /// <summary>
+        /// Inicia todos los evaluadores simples con sus requerimientos para el ClientePremium y los añade al Compuesto
+        /// </summary>
+        /// <returns></returns>
         public IEvaluador EvaluadorClientePremium()
         {
             EvaluadorCompuesto pEvaluadorCompuesto = new EvaluadorCompuesto();
@@ -84,6 +108,11 @@ namespace Ej3
             return pEvaluadorCompuesto;
         }
 
+        /// <summary>
+        /// Obtiene del diccionario el evaluador para el tipo de cliente llama al metodo del evaluador compuesto
+        /// </summary>
+        /// <param name="pSolicitud"></param>
+        /// <returns></returns>
         public bool EsValida(SolicitudPrestamo pSolicitud)
         {
             return this.iEvaluadorPorcliente[pSolicitud.Cliente.TipoCliente].EsValida(pSolicitud);

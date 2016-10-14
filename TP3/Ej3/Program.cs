@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ej3
 {
+    /// <summary>
+    /// Menu por consola que permite realizar solicitudes
+    /// </summary>
     class Program
     {
         static Fachada fachada = new Fachada();

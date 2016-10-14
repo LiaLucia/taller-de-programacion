@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ej3
 {
+    /// <summary>
+    /// Evaluador concreto segun cantidad de cuotas en que puede pagar un cliente
+    /// </summary>
     class EvaluadorCantidadCuotas : IEvaluador
     {
         private int iCantidadMaximaCuotas;
@@ -14,6 +17,11 @@ namespace Ej3
         {
             this.iCantidadMaximaCuotas = pCantidadMaximaCuotas;
         }
+        /// <summary>
+        /// Verificacion de la solicitud segun cantidad de cuotas maximas
+        /// </summary>
+        /// <param name="pSolicitud"></param>
+        /// <returns></returns>
         public bool EsValida(SolicitudPrestamo pSolicitud)
         {
 

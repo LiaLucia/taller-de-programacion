@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ej3
 {
+    /// <summary>
+    /// Evaluador Concreto por antiguedad laboral minima
+    /// </summary>
     class EvaluadorAntiguedadLaboral : IEvaluador
     {
         private int iAntiguedadMinima;
@@ -14,6 +17,11 @@ namespace Ej3
         {
             this.iAntiguedadMinima = pAntiguedadMinima;
         }
+        /// <summary>
+        /// Verificacion de la solicitud segun el evaluador
+        /// </summary>
+        /// <param name="pSolicitud"></param>
+        /// <returns></returns>
         public bool EsValida(SolicitudPrestamo pSolicitud)
         {
             if ((DateTime.Today-pSolicitud.Cliente.Empleo.FechaIngreso).TotalDays >= this.iAntiguedadMinima*365)

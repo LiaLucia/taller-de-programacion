@@ -5,7 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Ej3
-{
+{ 
+    /// <summary>
+    /// Evaluador Concreto simple segun la edad del solicitante
+    /// </summary>
     class EvaluadorEdad : IEvaluador
     {
         private int iEdadMinima;
@@ -16,6 +19,11 @@ namespace Ej3
             this.iEdadMinima = pEdadMinima;
             this.iEdadMaxima = pEdadMaxima;
         }
+        /// <summary>
+        /// Verifica la edad del solicitante cumpla con los requisitos
+        /// </summary>
+        /// <param name="pSolicitud"></param>
+        /// <returns></returns>
         public bool EsValida(SolicitudPrestamo pSolicitud)
         {
             int edad = DateTime.Today.Year-pSolicitud.Cliente.FechaNacimiento.Year;

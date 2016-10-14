@@ -6,5 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ej3
 {
+    /// <summary>
+    /// Enumerable con los tipos de cliente
+    /// </summary>
     enum TipoCliente { NoCliente, Cliente, ClienteGold, ClientePremium };
 }
