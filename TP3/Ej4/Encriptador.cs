@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ej4
 {
+    /// <summary>
+    /// Clase abstracta de encriptadores que implementa de la interfaz
+    /// </summary>
     public abstract class  Encriptador : IEncriptador
     {
         private string iNombre;

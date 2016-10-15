@@ -7,101 +7,78 @@ using System.IO;
 using System.Security.Cryptography;
 
 namespace Ej4
-{
+{   
+    /// <summary>
+    /// Advanced Encryption Standard concreto que utiliza librerias del Framework
+    /// </summary>
     class EncriptadorAES : Encriptador
     {
 
         public EncriptadorAES() : base("AES") { }
 
 
-
+        /// <summary>
+        /// Algoritmo de Encriptacion
+        /// </summary>
+        /// <param name="clearText">Cadena a encriptar</param>
+        /// <returns>Clave encriptada</returns>
         public override string Encriptar(string pCadena)
         {
-            using (Aes pAes = Aes.Create())
-            {
-               return EncryptStringToBytes_Aes(pCadena, pAes.Key, pAes.IV);
-            }
+            //Se crea una clave de encriptacion y se obtienen los bytes de la cadena.
+            string EncryptionKey = "abc123";
+            byte[] clearBytes = Encoding.Unicode.GetBytes(pCadena);
 
+            //Usando la clase AES, se crea un ecriptador.
+            using (Aes encryptor = Aes.Create())
+            {
+                //Utilizando la clave de encriptacion crea un conjunto de bytes aleatorios.
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                //Le asigna al encriptador los valores aleatorios (en formato byte) a la Key y al IV.
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+
+                //Se crea un flujo de memoria.
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    //Se crea un flujo de memoria encriptado, utilizando el encriptador y se lo asigna al modo escribir.
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        //Escribe en el flujo encriptado, los bytes de la palabra.
+                        cs.Write(clearBytes, 0, clearBytes.Length);
+                        cs.Close();
+                    }
+                    //Convierte el texto encriptado en bytes a un string.
+                    pCadena = Convert.ToBase64String(ms.ToArray());
+                }
+            }
+            return pCadena;
         }
+        /// <summary>
+        /// Algoritmo de Desencriptacion
+        /// </summary>
+        /// <param name="pCadena"> Clave encriptada</param>
+        /// <returns>Cadena original</returns>
         public override string Desencriptar(string pCadena)
         {
-            using (Aes pAes = Aes.Create())
+            string EncryptionKey = "abc123";
+            pCadena = pCadena.Replace(" ", "+");
+            byte[] cipherBytes = Convert.FromBase64String(pCadena);
+            using (Aes encryptor = Aes.Create())
             {
-                return DecryptStringFromBytes_Aes(pCadena, pAes.Key, pAes.IV);
-            }
-        }
-
-        static string EncryptStringToBytes_Aes(string plainText, byte[] Key,byte[] IV)
-        {
-            string encrypted;
-            // Create an Aes object
-            // with the specified key and IV.
-            using (Aes aesAlg = Aes.Create())
-            {
-                aesAlg.Key = Key;
-                aesAlg.IV = IV;
-
-                // Create a decrytor to perform the stream transform.
-                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
-
-                // Create the streams used for encryption.
-                using (MemoryStream msEncrypt = new MemoryStream())
+                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(EncryptionKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                encryptor.Key = pdb.GetBytes(32);
+                encryptor.IV = pdb.GetBytes(16);
+                using (MemoryStream ms = new MemoryStream())
                 {
-                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
                     {
-                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
-                        {
-
-                            //Write all data to the stream.
-                            swEncrypt.Write(plainText);
-                        }
-                        encrypted = Convert.ToBase64String(msEncrypt.ToArray());
+                        cs.Write(cipherBytes, 0, cipherBytes.Length);
+                        cs.Close();
                     }
+                    pCadena = Encoding.Unicode.GetString(ms.ToArray());
                 }
             }
-
-
-            // Return the encrypted bytes from the memory stream.
-            return encrypted;
-
-        }
-
-        static string DecryptStringFromBytes_Aes(string cipherText, byte[] Key, byte[] IV)
-        {
-            // Declare the string used to hold
-            // the decrypted text.
-            string plaintext = null;
-
-            // Create an Aes object
-            // with the specified key and IV.
-            using (Aes aesAlg = Aes.Create())
-            {
-                aesAlg.Key = Key;
-                aesAlg.IV = IV;
-
-                // Create a decrytor to perform the stream transform.
-                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
-                int integer;
-                int.TryParse(cipherText,out integer);
-                // Create the streams used for decryption.
-                using (MemoryStream msDecrypt = new MemoryStream(integer))
-                {
-                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
-                    {
-                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
-                        {
-
-                            // Read the decrypted bytes from the decrypting stream
-                                                        // and place them in a string.
-                                                        plaintext = srDecrypt.ReadToEnd();
-                        }
-                    }
-                }
-
-            }
-
-            return plaintext;
-
+            return pCadena;
         }
    
     }

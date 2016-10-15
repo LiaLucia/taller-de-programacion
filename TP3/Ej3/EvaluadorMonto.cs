@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ej3
 {
+    /// <summary>
+    /// Evaluador concreto segun el monto solicitado
+    /// </summary>
     class EvaluadorMonto : IEvaluador
     {
         private double iMontoMaximo;
@@ -14,6 +17,11 @@ namespace Ej3
         {
             this.iMontoMaximo = pMontoMaximo;
         }
+        /// <summary>
+        /// Evalua la solicitud segun el maximo que puede solicitar
+        /// </summary>
+        /// <param name="pSolicitud"></param>
+        /// <returns></returns>
         public bool EsValida(SolicitudPrestamo pSolicitud)
         {
             if (pSolicitud.Monto <= this.iMontoMaximo)

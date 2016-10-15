@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ej3
 {
+    /// <summary>
+    /// Evaluador Compuesto, contiene evaluadores en una lista.
+    /// Utiliza patron Composite
+    /// </summary>
     class EvaluadorCompuesto : IEvaluador
     {
         private List<IEvaluador> evaluadores;
@@ -15,6 +19,11 @@ namespace Ej3
             this.evaluadores = new List<IEvaluador>();
         }
 
+        /// <summary>
+        /// Verifica la solicitud mediante los distintos evaluadores simples de la lista de evaluadores
+        /// </summary>
+        /// <param name="pSolicitud"></param>
+        /// <returns></returns>
         public bool EsValida(SolicitudPrestamo pSolicitud)
         {
             bool resultado = true;
@@ -27,6 +36,10 @@ namespace Ej3
             return resultado;
         }
 
+        /// <summary>
+        /// Añade un nuevo evaluador a la lista
+        /// </summary>
+        /// <param name="pEvaulador"></param>
         public void AgregarEvaluador(IEvaluador pEvaulador)
         {
             this.evaluadores.Add(pEvaulador);
