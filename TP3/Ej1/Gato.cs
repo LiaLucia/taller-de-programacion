@@ -15,7 +15,7 @@ namespace Ej1
         /// </summary>
         public override void HacerRuido()
         {
-            Console.WriteLine("Miauu");
+            Console.WriteLine("Miau");
         }
     }
 }
